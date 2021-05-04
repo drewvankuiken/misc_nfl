@@ -121,7 +121,7 @@ historical_data = reduce(lambda x, y: pd.merge(x, y, on = ['player', 'position']
 historical_data[['sep2020']] = historical_data[['sep2020']].replace({'\*':''}, regex=True)
 historical_data['sep2020'] = pd.to_numeric(historical_data['sep2020'])
 
-hist_data = historical_data.groupby('player').mean()
+hist_data = historical_data.groupby(['player','position']).mean().reset_index()
 
 hist_data.to_csv('fp_player_values.csv', index=True)
 
